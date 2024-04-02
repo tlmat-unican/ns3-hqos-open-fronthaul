@@ -92,21 +92,6 @@ MarkerQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
     int band = 0;
     Ptr<const Ipv4QueueDiscItem> ipItem = DynamicCast<const Ipv4QueueDiscItem>(item);
     Ipv4Header ipHeader = ipItem->GetHeader();
-    // std::cout << "IP addr src: " << ipHeader.GetSource() << " DSCP value: " << ipHeader.GetDscp() << std::endl;
-    // if(ipHeader.GetSource() == "11.1.0.1"){
-    //     ipHeader.SetDscp(Ipv4Header::DSCP_EF);
-    // }else if(ipHeader.GetSource() == "11.2.0.1"){
-    //     ipHeader.SetDscp(Ipv4Header::DSCP_CS1);
-    //     band = 1;
-    // }else if(ipHeader.GetSource() == "11.3.0.1"){
-    //     ipHeader.SetDscp(Ipv4Header::DSCP_CS1);
-    //          band = 2;
-    // }else if(ipHeader.GetSource() == "11.4.0.1"){
-    //     ipHeader.SetDscp(Ipv4Header::DSCP_CS1);
-    //          band = 3;
-    // }
-    
-  
     Ptr<Packet> writablePacket = ipItem->GetPacket()->Copy(); // Copia para no modificar el original
 
     Ipv4Header ipv4Header;
@@ -114,15 +99,11 @@ MarkerQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
 
     // Parse the IPv4 header
     writablePacket->RemoveHeader(ipv4Header);
-
-    // Check if the payload is UDP
-  
     // Parse the UDP header
     writablePacket->RemoveHeader(udpHeader);
     
     // Obtain the source port
     uint16_t udpDestPort = udpHeader.GetDestinationPort();
-    // std::cout << udpDestPort << std::endl;
 
     // Get an iterator pointing to the first element in the map
     std::map<int, int>::iterator it = markingMap.begin();
@@ -138,19 +119,14 @@ MarkerQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
             ipHeader.SetDscp(ns3::Ipv4Header::DscpType(it->second));
             band = 0;
             portFound = true;
-            // if(udpDestPort == 10900){
-            //     std::cout <<"Port: " <<udpDestPort << " DSCP: "<< ns3::Ipv4Header::DscpType(it->second) << " " << cont_pkt++ <<std::endl; // REMOVE
-            // }
-            
             break; // Exit the loop once found
         }
-        // Move to the next element in the map
         ++it;
     }
 
     // If the port was not found in the range, assign a default DSCP value (e.g., CS4)
     if (!portFound) {
-        // std::cout << udpDestPort << std::e3 ndl;
+        NS_LOG_INFO("Src Port");
         ipHeader.SetDscp(Ipv4Header::DSCP_CS4);
         band = 0;
     }
@@ -160,34 +136,13 @@ MarkerQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
  
 
 
-    // NS_LOG_INFO("--Header: " << ipHeader);
-
-    //---------------------------------------------
-
-    // std::cout << "Header: " << ipHeader << std::endl;
-    // std::cout << ipHeader << std::endl;
-    // SocketPriorityTag priorityTag;
-    // priorityTag.SetPriority(Socket::IpTos2Priority(ipHeader.GetTos()));
-    // item->GetPacket()->AddPacketTag(priorityTag);
   
     Ptr<Packet> modpkt = ipItem->GetPacket()->Copy();
-    // std::cout << modpkt->GetSize() << std::endl;
-    // Create a new QueueDiscItem with the modified packet
     modpkt->RemoveHeader(ipHeader);
-    // std::cout<< "Header removed"<< std::endl;
-    // std::cout << modpkt->GetSize() << std::endl;
-    // ipHeader = ipItem->GetHeader();
-    // modpkt->AddHeader(ipHeader);
-    // std::cout<< "Header added"<< std::endl;
-    // std::cout << modpkt->GetSize() << std::endl;
     Ptr<QueueDiscItem> modifiedQueueItem = Create<Ipv4QueueDiscItem>(modpkt, ipItem->GetAddress(), ipItem->GetProtocol(), ipHeader);
 
 
     bool retval = GetInternalQueue(band)->Enqueue(modifiedQueueItem);
-    // std::cout<< "Header added"<< std::endl;
-    // If Queue::Enqueue fails, QueueDisc::DropBeforeEnqueue is called by the
-    // internal queue because QueueDisc::AddInternalQueue sets the trace callback
-
     if (!retval)
     {
         NS_LOG_WARN("Packet enqueue failed. Check the size of the internal queues");
