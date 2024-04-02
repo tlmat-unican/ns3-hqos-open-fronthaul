@@ -23,7 +23,7 @@ This repository hosts the ns-3 implementation of Differentiated Services Code Po
 - [ ] [Model-Library](https://www.nsnam.org/docs/release/3.39/models/html/index.html)
 
 
-## [ ] :envelope_with_arrow:  Contact 
+## :envelope_with_arrow:  Contact 
 * [Fátima Khan Blanco (khanf@unican.es)](mailto:khanf@unican.es)
 * [Luis Diez (diezlf@unican.es)](mailto:diezlf@unican.es)
 * [Ramón Agüero (agueroc@unican.es)](mailto:agueroc@unican.es)
