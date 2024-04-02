@@ -2,7 +2,7 @@
 This repository hosts the ns-3 implementation of Differentiated Services Code Point (DSCP). Its modeling aims to enable performance evaluations of network slices with varying priority levels, as well as the convergence of technologies including backhaul and fronthaul.
 
 ## Building ns-3
-'''
+```
 ./ns3 configure --disable-werror --disable-python --disable-tests --disable-examples --build-profile=release
 ./ns3 build
 ```
