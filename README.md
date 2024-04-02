@@ -8,13 +8,13 @@ This repository hosts the ns-3 implementation of Differentiated Services Code Po
 ```
 ## Project Structere
 
-- The folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder contains a generic scenario ([_juniper-setupnewlinks.cc_](./ns-allinone-3.39/ns-3.39/scratch/juniper-setupnewlinks.cc)) to evaluate HQoS as well as the JSON files to configurate traffic flows from backhaul and fronthaul.
+- The folder [_scratch_](./ns-allinone-3.39/ns-3.39/scratch/) folder contains a generic scenario ([_juniper-setupnewlinks.cc_](./ns-allinone-3.39/ns-3.39/scratch/juniper-setupnewlinks.cc)) to evaluate HQoS as well as the JSON files to configurate traffic flows from backhaul and fronthaul.
 
 - The [_scripts_](./scripts/) folder contains scripts needed to run different topologies. It also contains a Jupyter notebook to represent the outcomes.
 
 ## HQoS Skills:
 
-- [Traffic-Control](https://www.nsnam.org/docs/models/html/traffic-control.html) The Traffic Control layer sits in between the NetDevices (L2) and any network protocol (e.g. IP). It is in charge of processing packets and performing actions on them: scheduling, dropping, marking, policing, etc, you can finde the code in [_traffic-control_](./ns-allinone-3.35/ns-3.35/src/traffic-control/)
+- [Traffic-Control](https://www.nsnam.org/docs/models/html/traffic-control.html) The Traffic Control layer sits in between the NetDevices (L2) and any network protocol (e.g. IP). It is in charge of processing packets and performing actions on them: scheduling, dropping, marking, policing, etc, you can finde the code in [_traffic-control_](./ns-allinone-3.39/ns-3.39/src/traffic-control/)
 
 ## NS-3 Documentation
 
