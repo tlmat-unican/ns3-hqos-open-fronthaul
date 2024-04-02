@@ -338,8 +338,7 @@ WrrQueueDisc::CheckConfig()
         return false;
     }
 
-     // we are at initialization time. If the user has not set a quantum value,
-    // set the quantum to the MTU of the device (if any)
+
     // for (int i = 0; i < (int)m_quantum.size(); i++){
     //     if (!m_quantum[i])
     //     {
