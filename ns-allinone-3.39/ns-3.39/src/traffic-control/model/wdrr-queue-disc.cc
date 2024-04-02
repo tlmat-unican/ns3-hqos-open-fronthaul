@@ -284,9 +284,6 @@ WdrrQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
     if (ipHeader.GetSource()  == "10.1.0.1"){
         std::cout << "Error" << std::endl;
     }
-    // Way to obtain the current pkts in the queue
-    // NS_LOG_INFO("--- Number packets band " << band << ": " << flow->GetQueueDisc()->GetNPackets() << " from: " << ipHeader.GetSource()); 
-    
     
     if (GetCurrentSize() > GetMaxSize())
     {

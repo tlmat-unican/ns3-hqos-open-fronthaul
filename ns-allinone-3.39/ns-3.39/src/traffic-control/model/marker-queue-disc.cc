@@ -131,11 +131,6 @@ MarkerQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
         band = 0;
     }
     
-   
-
- 
-
-
   
     Ptr<Packet> modpkt = ipItem->GetPacket()->Copy();
     modpkt->RemoveHeader(ipHeader);
