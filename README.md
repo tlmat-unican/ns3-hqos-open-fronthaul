@@ -7,19 +7,20 @@ This repository hosts the ns-3 implementation of Differentiated Services Code Po
 ./ns3 build
 ```
 ## Project Structere
-
 - The folder [_scratch_](./ns-allinone-3.39/ns-3.39/scratch/) folder contains a generic scenario ([_juniper-setupnewlinks.cc_](./ns-allinone-3.39/ns-3.39/scratch/juniper-setupnewlinks.cc)) to evaluate HQoS as well as the JSON files to configurate traffic flows from backhaul and fronthaul.
 
 - The [_scripts_](./ns-allinone-3.39/ns-3.39/scripts/) folder contains scripts needed to run different topologies. It also contains a Jupyter notebook to represent the outcomes.
 
 ## HQoS Skills:
-
 - [Traffic-Control](https://www.nsnam.org/docs/models/html/traffic-control.html) The Traffic Control layer sits in between the NetDevices (L2) and any network protocol (e.g. IP). It is in charge of processing packets and performing actions on them: scheduling, dropping, marking, policing, etc. The code is available in [_traffic-control_](./ns-allinone-3.39/ns-3.39/src/traffic-control/) folder.
 
 
-## Plots generation with Jupyter NoteBook
+## Scenario
+- [Runscen](./ns-allinone-3.39/ns-3.39/scripts/runscen.py) is a script that allows making a sewpt over the channel capacity from the JSON scenario selected from the 
+[_scratch_](./ns-allinone-3.39/ns-3.39/scratch/).
 
-- [Meditcom24](./ns-allinone-3.39/ns-3.39/scripts/MEDITCOM24.ipynb) contains snipts of code extract the outcomes from datafiles generating in simulation with the   use of the script of code. 
+## Plots generation with Jupyter NoteBook
+- [Meditcom24](./ns-allinone-3.39/ns-3.39/scripts/MEDITCOM24.ipynb) contains snipts of code extract the outcomes from datafiles generating in simulation with the   use of the script.
 
 __Disclaimer__: figures in manuscrip are generated with Tikz.
 
