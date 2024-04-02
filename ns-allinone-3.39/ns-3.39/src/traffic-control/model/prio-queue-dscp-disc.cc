@@ -96,9 +96,6 @@ PrioQueueDscpDisc::DoEnqueue(Ptr<QueueDiscItem> item)
     NS_ASSERT_MSG(band < GetNQueueDiscClasses(), "Selected band out of range");
     bool retval = GetQueueDiscClass(band)->GetQueueDisc()->Enqueue(item);
     NS_LOG_INFO(Simulator::Now().GetSeconds() << " PRIO Enqueue: Number packets band " << band << ": " <<  GetQueueDiscClass(band)->GetQueueDisc()->GetNPackets() << " from: " << ipHeader.GetSource());
-    // If Queue::Enqueue fails, QueueDisc::Drop is called by the child queue disc
-    // because QueueDisc::AddQueueDiscClass sets the drop callback
-    // std::cout<< "+++ Number of packets in Band: " << band << " " << GetQueueDiscClass(band)->GetQueueDisc()->GetNPackets()<<std::endl ;
     NS_LOG_LOGIC("Number packets band " << band << ": "
                                         << GetQueueDiscClass(band)->GetQueueDisc()->GetNPackets());
     

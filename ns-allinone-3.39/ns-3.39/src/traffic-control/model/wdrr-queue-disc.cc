@@ -247,7 +247,6 @@ WdrrQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
     auto it = mapuca.find(dscp);
     // If the port is found in the map, assign the corresponding DSCP value
     if (it != mapuca.end()) {
-        // std::cout << dscp << std::endl;
         band = it->second;
         NS_LOG_INFO(band);
     }else{
