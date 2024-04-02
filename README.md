@@ -19,7 +19,7 @@ This repository hosts the ns-3 implementation of Differentiated Services Code Po
 - [Runscen](./ns-allinone-3.39/ns-3.39/scripts/runscen.py)  is a script designed to conduct a sweep over the channel capacity using the selected JSON scenario from the [_scratch_](./ns-allinone-3.39/ns-3.39/scratch/) directory.
 
 ## Plots generation with Jupyter NoteBook
-- [Analysis](./ns-allinone-3.39/ns-3.39/scripts/Analysis.ipynb) contains snipts of code extract the outcomes from datafiles generating in simulation with the   use of the script.
+- [Analysis](./ns-allinone-3.39/ns-3.39/scripts/Analysis.ipynb) contains snipts of code extract the outcomes from datafiles generating in simulation with the use of the script.
 
 __Disclaimer__: figures in manuscrip are generated with Tikz.
 
