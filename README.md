@@ -12,15 +12,14 @@ This repository hosts the ns-3 implementation of Differentiated Services Code Po
 
 - The [_scripts_](./scripts/) folder contains scripts needed to run different topologies. It also contains a Jupyter notebook to represent the outcomes.
 
-## All important modifications are made in:
+## HQoS Skills:
 
-- [ ] :hammer_and_wrench: [Traffic-Control](https://www.nsnam.org/docs/models/html/traffic-control.html) The Traffic Control layer sits in between the NetDevices (L2) and any network protocol (e.g. IP). It is in charge of processing packets and performing actions on them: scheduling, dropping, marking, policing, etc.
-![My image](/docs/tfl.png)
+- [Traffic-Control](https://www.nsnam.org/docs/models/html/traffic-control.html) The Traffic Control layer sits in between the NetDevices (L2) and any network protocol (e.g. IP). It is in charge of processing packets and performing actions on them: scheduling, dropping, marking, policing, etc, you can finde the code in [_traffic-control_](./ns-allinone-3.35/ns-3.35/src/traffic-control/)
 
-## Documentation
+## NS-3 Documentation
 
-- [ ] [Manual](https://www.nsnam.org/docs/release/3.39/manual/html/index.html) 
-- [ ] [Model-Library](https://www.nsnam.org/docs/release/3.39/models/html/index.html)
+-  [Manual](https://www.nsnam.org/docs/release/3.39/manual/html/index.html) 
+-  [Model-Library](https://www.nsnam.org/docs/release/3.39/models/html/index.html)
 
 
 ## :envelope_with_arrow:  Contact 
