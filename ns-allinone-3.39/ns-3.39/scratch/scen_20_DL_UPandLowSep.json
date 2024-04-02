@@ -5,7 +5,7 @@
     "NumRuflows": 3,
     "Poisson": false,
     "URatenum": 4.4974,
-    "Seconds_sim": 1,
+    "Seconds_sim": 0.001,
     "QSD": "Wrr",
     "MapQueue": "8 0 16 1 24 2 32 3",
     "Weights": "55 325 40 80",

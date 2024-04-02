@@ -3,9 +3,9 @@
     * This is a basic example that compares CoDel and PfifoFast queues using a simple, single-flow
     * topology:
     *
-    * source_{1-N} --------------------------Router_marking--------------------------QoS_router------------------------DU_sink
-    *                   inf Mb/s, 0 ms                          inf Mb/s, 0 ms                       5 Mb/s, 5ms
-    *                                                                                                 bottleneck
+    * source_{1-N} --------------------------Router_marking--------------------------QoS_router------------------------sink_{1-N}
+    *                   inf Mb/s, 0 ms                          inf Mb/s, 0 ms                       inf Mb/s, 0ms
+    *                                                                                                
     *
     * The source generates traffic across the network using BulkSendApplication.
     * The default TCP version in ns-3, TcpNewReno, is used as the transport-layer protocol.
@@ -139,7 +139,7 @@
         CommandLine cmd(__FILE__);
         cmd.AddValue("json-path", "Configuration file name", JSONpath);
         cmd.Parse(argc, argv);
-        std::cout << BG_ORANGE << JSONpath << RESET << std::endl;
+    
         // LogComponentEnable("OfhApplication", LOG_LEVEL_INFO);
         // LogComponentEnable("WrrQueueDisc", LOG_LEVEL_INFO);
         // LogComponentEnable("PrioQueueDscpDisc", LOG_LEVEL_INFO);
@@ -244,44 +244,15 @@
             // Get ClassIdList for the second-level queues
             TrafficControlHelper::ClassIdList cid = tch2.AddQueueDiscClasses(rootHandle, 2, "ns3::QueueDiscClass");
             tch2.AddChildQueueDisc(rootHandle, cid[0], "ns3::FifoQueueDisc");
-            // tch2.AddChildQueueDisc(rootHandle, cid[1], "ns3::WfqQueueDisc", "Quantum", StringValue("46 45 8"), "MapQueue", StringValue("8 0 16 1 24 2"), "ChannelDataRate", DoubleValue(data.at("MidLinkCap")));
-            // tch2.AddChildQueueDisc(rootHandle, cid[1], "ns3::WrrQueueDisc", "Quantum", StringValue(data.at("Weights")), "MapQueue", StringValue("8 0 16 1 24 2"));
             std::string qsd_type = data.at("QSD");
             qsd_type.erase(std::remove(qsd_type.begin(), qsd_type.end(), '"'), qsd_type.end()); // Remove double quotes
             tch2.AddChildQueueDisc(rootHandle, cid[1], "ns3::"+ qsd_type + "QueueDisc", "Quantum", StringValue(data.at("Weights")), "MapQueue", StringValue(data.at("MapQueue")));
             // tch2.AddChildQueueDisc(rootHandle, cid[1], "ns3::WfqQueueDisc", "Quantum", StringValue(data.at("Weights")), "MapQueue", StringValue(data.at()));
             tch2.Install(R1R2.Get(0));
-            // tch2.Install(R1R2.Get(1));
-            // tch2.Install(R2Du.Get(0));
-    
+
         }
 
 
-        // if(enablehqos){
-
-        //     //// MARKING 
-        //     TrafficControlHelper tch1;
-        //     tch1.SetRootQueueDisc("ns3::MarkerQueueDisc", "MarkingQueue", StringValue(data.at("Marking_Port")));
-            
-        //     tch1.Install(enB0R1.Get(0));
-        //     tch1.Install(enB1R1.Get(0));
-        //     tch1.Install(enB2R1.Get(0));
-        //     tch1.Install(RuR1.Get(0));
-        //     // tch1.Install(R4R9.Get(0));
-
-        //     //// Policies
-        //     TrafficControlHelper tch2;
-    
-        //     std::string qsd_type = data.at("QSD");
-        //     qsd_type.erase(std::remove(qsd_type.begin(), qsd_type.end(), '"'), qsd_type.end()); // Remove double quotes
-        //     tch2.SetRootQueueDisc("ns3::"+ qsd_type + "QueueDisc", "Quantum", StringValue(data.at("Weights")), "MapQueue", StringValue(data.at("MapQueue")));
-        //     // tch2.AddChildQueueDisc(rootHandle, cid[1], "ns3::WfqQueueDisc", "Quantum", StringValue(data.at("Weights")), "MapQueue", StringValue("8 0 16 1 24 2"));
-        //     tch2.Install(R1R2.Get(0));
-        //     // tch2.Install(R1R2.Get(1));
-        //     // tch2.Install(R2Du.Get(0));
-
-        // }
-        
         /*******************************************************************
         ************** Creating networks from spine leaf nodes *************
         ********************************************************************/

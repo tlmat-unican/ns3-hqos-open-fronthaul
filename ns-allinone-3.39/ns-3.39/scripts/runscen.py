@@ -40,7 +40,12 @@ Step = 0.04
 Cap_swept = np.arange(Start, Stop+Step, Step, dtype=float)  
 
 
+
 def main():
+
+
+    cmd = f"mkdir -p ../sim_results" 
+    os.system(cmd)
     for index, combi_name in enumerate(Type_of_combis):
         # index = index + 1 
         print(f"{combi_name} - {index}")
@@ -48,10 +53,9 @@ def main():
         print(f"Marking Port: {Marking_Port[index]}")
         for cap in Cap_swept:
             filename = f"MOD_{Mode}_{combi_name}_{band}M_{cap:.2f}"
-            # Change number of streams (json file)
-            cmd = f"mkdir -p ./sim_results/{filename}"  # Use -p to avoid 'File exists' error
+            cmd = f"mkdir -p ../sim_results/{filename}" 
             os.system(cmd)
-            with open(f"./scratch/scen_{band}_{Mode}.json", "r") as jsonFileReceiver:
+            with open(f"../scratch/scen_{band}_{Mode}.json", "r") as jsonFileReceiver:
                 data = json.load(jsonFileReceiver)
             data["FolderName"] = f"{filename}"
             print(f"Link capacity: {cap:.2f}")
@@ -59,13 +63,13 @@ def main():
             
             # data["Weights"] = Weights[index]
             # data["Marking_Port"] = Marking_Port[index]
-            with open("./scratch/scen_ex.json", "w") as jsonFileReceiver:
+            with open("../scratch/scen_ex.json", "w") as jsonFileReceiver:
                 json.dump(data, jsonFileReceiver)
 
-            cmd = "./ns3 run scratch/juniper-setupnewlinks.cc" 
+            cmd = "../ns3 run scratch/juniper-setupnewlinks.cc" 
             os.system(cmd)    
 
-            os.system(f"tar -C ./sim_results -zcvf ./sim_results/{filename}.tar {filename}")
+            os.system(f"tar -C ../sim_results -zcvf ../sim_results/{filename}.tar {filename}")
             # os.system(f"rm -r sim_results/{filename}/")
 
 if __name__ == '__main__':
