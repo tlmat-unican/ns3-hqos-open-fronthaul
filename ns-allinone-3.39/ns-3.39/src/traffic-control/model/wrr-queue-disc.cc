@@ -188,6 +188,8 @@ WrrQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
         // std::cout << dscp << std::endl;
         band = it->second;
         NS_LOG_INFO(band);
+    }else{
+        NS_LOG_INFO("DSCP value unknown - not specified at configuration");
     }
 
     Ptr<WrrFlow> flow;
@@ -307,7 +309,6 @@ WrrQueueDisc::DoDequeue()
         }
         else
         {   
-            // std::cout << "Flow " << flow->GetIndex() << " has been select" << std::endl;
             NS_LOG_INFO(Simulator::Now().GetSeconds() << "  Dequeue: Flow " << flow->GetIndex() << " has been select" );
             NS_LOG_DEBUG("Dequeued packet " << item->GetPacket()->GetSize());
         }
@@ -339,27 +340,14 @@ WrrQueueDisc::CheckConfig()
     }
 
 
-    // for (int i = 0; i < (int)m_quantum.size(); i++){
-    //     if (!m_quantum[i])
-    //     {
-    //         Ptr<NetDeviceQueueInterface> ndqi = GetNetDeviceQueueInterface();
-    //         Ptr<NetDevice> dev;
-    //         // if the NetDeviceQueueInterface object is aggregated to a
-    //         // NetDevice, get the MTU of such NetDevice
-    //         if (ndqi && (dev = ndqi->GetObject<NetDevice>()))
-    //         {
-    //             m_quantum[i] = 1;
-    //             NS_LOG_DEBUG("Setting the quantum to the MTU of the device: " << m_quantum[i]);
-    //         }
+    for (int i = 0; i < (int)m_quantum.size(); i++){
+        if (m_quantum[i]==0)
+        {
+            m_quantum[i] = 1;
+            NS_LOG_INFO("Quantun fixed as its default value");
+        }
 
-    //         if (!m_quantum[i])
-    //         {
-    //             NS_LOG_ERROR("The quantum parameter cannot be null");
-    //             return false;
-    //         }
-    //     }
-
-    // }
+    }
 
 
 

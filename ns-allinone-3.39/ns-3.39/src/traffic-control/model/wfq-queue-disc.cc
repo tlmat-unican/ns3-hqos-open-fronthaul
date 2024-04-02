@@ -187,13 +187,14 @@ WfqQueueDisc::DoEnqueue(Ptr<QueueDiscItem> item)
     int dscp = ipHeader.GetDscp();
 
 
-    // std::cout << dscp << std::endl;
     auto it = mapuca.find(dscp);
-    
     // If the port is found in the map, assign the corresponding DSCP value
     if (it != mapuca.end()) {
+        // std::cout << dscp << std::endl;
         band = it->second;
         NS_LOG_INFO(band);
+    }else{
+        NS_LOG_INFO("DSCP value unknown - not specified at configuration");
     }
     
     Ptr<WfqFlow> flow;
