@@ -155,15 +155,6 @@ MarkerQueueDisc::DoDequeue()
     NS_LOG_FUNCTION(this);
 
     Ptr<QueueDiscItem> item;
-
-    // Dequeue from the single internal queue
-    // if ((item = GetInternalQueue(0)->Dequeue()))
-    // {
-    //     NS_LOG_LOGIC("Dequeued: " << item);
-    //     NS_LOG_LOGIC("Number of packets in the queue: " << GetInternalQueue(0)->GetNPackets());
-    //     return item;
-    // }
-
     
     for (uint32_t i = 0; i < GetNInternalQueues(); i++)
     {
